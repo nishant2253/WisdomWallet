@@ -1,0 +1,15 @@
+const { expect } = require("chai");
+
+describe("Token Contract",function(){
+    it("Deployement should assign to the total supply to the owner",async function(){
+        const[owner]= await ethers.getSigners();//get signers is the object
+        console.log("signers object:",owner);
+        const token = await ethers.getcontractfactory("token");// instance contract
+        const hardhatToken = await token.deploy();//deploy contract
+        const ownerBalance = await hardhatToken.balanceOf(owner.address);//OwnerBalance=10000
+        console.log("owner address",owner.address);
+        expect(await hardhatToken.totalsupply()).to.equal(ownerBalance)  //totalsupply=10000
+
+
+    });
+});//chai library and mocha framework
